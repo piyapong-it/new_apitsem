@@ -139,6 +139,7 @@ module.exports = {
       .input("buyfrom1", sql.NVarChar, data.buyfrom1)
       .input("buyfrom2", sql.NVarChar, data.buyfrom2)
       .input("status", sql.NVarChar, data.status)
+      .input("outlContact", sql.NVarChar, data.outlContact)
       .input("outlEnabled", sql.NVarChar, data.outlEnabled)
       .input("outlTel", sql.NVarChar, data.outlTel)
       .input("outlMobile", sql.NVarChar, data.outlMobile)
@@ -154,7 +155,7 @@ module.exports = {
       .query(
         `DECLARE	@RetMessage nvarchar(100)
         Exec spUpdateOutl @lat = @lat , @long = @long , @buyfrom1 = @buyfrom1 ,
-        @buyfrom2 = @buyfrom2 , @status = @status,  @outlEnabled= @outlEnabled , @outlTel = @outlTel ,
+        @buyfrom2 = @buyfrom2 , @status = @status, @outlContact = @outlContact, @outlEnabled= @outlEnabled , @outlTel = @outlTel ,
         @outlMobile = @outlMobile, @type = @type, @typeDesc = @typeDesc, @provinceID = @provinceID,
         @outlZipcode = @outlZipcode, @address = @address, @amphur= @amphur, @tumbon = @tumbon, @outlId = @outlId,
         @UpdateBy= @UpdateBy, @RetMessage = @RetMessage OUTPUT SELECT	@RetMessage as N'RetMessage' ;`,

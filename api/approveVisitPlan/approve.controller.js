@@ -29,8 +29,8 @@ module.exports = {
       });
       var mailOptions = {
         from: "tsem@tapb.co.th",
-        to: `${results.recordset[0].SALES_EMAIL}`,
-        // to: `${results.recordset[0].SALES_EMAIL},${results.recordset[0].ASM_EMAIL}, peemanat@tapb.co.th`,
+        // to: `${results.recordset[0].SALES_EMAIL}`,
+        to: `${results.recordset[0].SALES_EMAIL},${results.recordset[0].ASM_EMAIL}`,
         subject: "TSEM Visit Plan Alert",
         text: `TSEM alert`,
         html: `<h4>Open application tsem to approve and verify.</h4>
