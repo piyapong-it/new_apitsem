@@ -142,12 +142,16 @@ module.exports = {
       .input("VisitID", sql.NVarChar, data.visitid)
       .input("VisitStatus", sql.NVarChar, data.visitstatus)
       .input("UpdateBy", sql.NVarChar(30), data.updateby)
+      .input("OultetID", sql.NVarChar(30), data.OultetID)
+      .input("Date", sql.NVarChar(30), data.Date)
       .query(
         `DECLARE	@RetMessage varchar(50)
                     EXEC	[dbo].[spUpdateVisit]
                     @VisitID = @VisitID,
                     @VisitStatus = @VisitStatus,
                     @UpdateBy = @UpdateBy,
+                    @OultetID = @OultetID,
+                    @Date = @Date,
                     @RetMessage = @RetMessage OUTPUT
             
                     SELECT	@RetMessage as N'RetMessage' ;`,
@@ -224,6 +228,8 @@ module.exports = {
       .input("UpdateBy", sql.NVarChar, data.updateby)
       .input("OutletId", sql.NVarChar, data.outletid)
       .input("VisitDate", sql.Date, data.visitdate)
+      .input("Seq", sql.Int, data.seq)
+      .input("Remark", sql.NVarChar, data.remark)
       .query(
         `DECLARE	@RetMessage varchar(50)
                     EXEC	[dbo].[spUpdateVisitCallCard]
@@ -238,6 +244,8 @@ module.exports = {
                     @UpdateBy = @UpdateBy,
                     @OutletId = @OutletId,
                     @VisitDate = @VisitDate,
+                    @Seq = @Seq,
+                    @Remark = @Remark,
                     @RetMessage = @RetMessage OUTPUT
             
                     SELECT	@RetMessage as N'RetMessage' ;`,
@@ -256,12 +264,14 @@ module.exports = {
       .input("VisitID", sql.NVarChar, data.visitid)
       .input("AgendaId", sql.Int, data.agendaid)
       .input("PMId", sql.Numeric, data.pmid)
+      .input("Seq", sql.Numeric, data.Seq)
       .query(
         `DECLARE	@RetMessage varchar(50)
                     EXEC	[dbo].[spDeleteVisitCallCard]
                     @VisitID = @VisitID,
                     @AgendaId = @AgendaId,
                     @PMId = @PMId,
+                    @Seq = @Seq,
                     @RetMessage = @RetMessage OUTPUT
             
                     SELECT	@RetMessage as N'RetMessage' ;`,
@@ -286,6 +296,25 @@ module.exports = {
                     @P_VisitId = @P_VisitId,
                     @P_OWN = @P_OWN,
 
+                    @RetMessage = @RetMessage OUTPUT
+            
+                    SELECT	@RetMessage as N'RetMessage' ;`,
+        (error, results, fields) => {
+          if (error) {
+            return callBack(error);
+          }
+          return callBack(null, results);
+        }
+      );
+  },
+
+  getBrandActive: async (callBack) => {
+    const pool = await poolPromise;
+    const queryResult = await pool
+      .request()
+      .query(
+        `DECLARE	@RetMessage varchar(150)
+                    EXEC	[dbo].[spGetBrandActive] 
                     @RetMessage = @RetMessage OUTPUT
             
                     SELECT	@RetMessage as N'RetMessage' ;`,

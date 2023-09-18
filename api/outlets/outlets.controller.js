@@ -6,7 +6,8 @@ const {
   getOutletsMapBySalesID,
   getOutletTypeStatus,
   getOutletAll,
-  updateOutletDetail
+  updateOutletDetail,
+  OutletRequest
 } = require("./outlets.service");
 
 module.exports = {
@@ -218,6 +219,36 @@ module.exports = {
   updateOutletDetail: (req, res) => {
     const body = req.body;
     updateOutletDetail(body, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res
+          .status(500)
+          .send(JSON.stringify({ success: false, message: err, result: [] }));
+      }
+      if (results.recordset.length == 0) {
+        return res
+          .status(200)
+          .send(
+            JSON.stringify({
+              success: true,
+              message: "Record not found",
+              result: [],
+            })
+          );
+      }
+      return res.send(
+        JSON.stringify({
+          success: true,
+          message: "Total Record is " + results.recordset.length,
+          result: results.recordset,
+        })
+      );
+    });
+  },
+
+  OutletRequest: (req, res) => {
+    const userId = req.params.userId;
+    OutletRequest(userId, (err, results) => {
       if (err) {
         console.log(err);
         return res

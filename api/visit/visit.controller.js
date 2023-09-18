@@ -13,6 +13,7 @@ const {
     deleteVisitCallCard,
     updateVisitEOEFlag,
     getVisitEoEAll,
+    getBrandActive,
     getVisitPlan,
     getOutlVisitPlan,
     updateOutlVisitPlan
@@ -174,6 +175,22 @@ module.exports={
                 console.log(err);
                 return res.send(JSON.stringify({ success: false, message: err.message,result:[] }));
             }
+            return  res.send(JSON.stringify({ success: true, message: "Total Record is " + results.recordset.length, result: results.recordset }));
+        });
+    },
+    getBrandActive: (req, res) => {
+        getBrandActive((err, results) => {
+            if (err) {
+                console.log(err);
+                return res.send(JSON.stringify({ success: false, message: err.message,result:[] }));
+            }
+            results.recordset.push({
+                BM_ID: 0,
+                BM_NAME: "ALL",
+              });
+              results.recordset.sort(function (a, b) {
+                return a.BM_ID - b.BM_ID;
+              });
             return  res.send(JSON.stringify({ success: true, message: "Total Record is " + results.recordset.length, result: results.recordset }));
         });
     },

@@ -13,6 +13,7 @@ const {
   deleteVisitCallCard,
   updateVisitEOEFlag,
   getVisitEoEAll,
+  getBrandActive,
   getVisitPlan,
   getOutlVisitPlan,
   updateOutlVisitPlan,
@@ -35,6 +36,7 @@ routerVisit.post("/updateVisitCallCard/", checkToken, updateVisitCallCard);
 routerVisit.post("/deleteVisitCallCard/", checkToken, deleteVisitCallCard);
 // new routing
 routerVisit.post("/getVisitEoEAll/", checkToken, getVisitEoEAll);
+routerVisit.get("/getBrandActive/",checkToken, getBrandActive);
 routerVisit.post("/updateVisitEOEFlag/", checkToken, updateVisitEOEFlag);
 
 //new feature visit plan

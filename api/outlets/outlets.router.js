@@ -7,6 +7,7 @@ const {
   getOutletTypeStatus,
   getOutletAll,
   updateOutletDetail,
+  OutletRequest,
 } = require("./outlets.controller");
 
 const routerOutlet = require("express").Router();
@@ -37,5 +38,6 @@ routerOutlet.get(
 routerOutlet.post("/getOutletTypeStatus", checkToken, getOutletTypeStatus);
 routerOutlet.get("/getOutletAll", checkToken,  getOutletAll);
 routerOutlet.post("/updateOutletDetail",checkToken, updateOutletDetail);
+routerOutlet.get("/OutletRequest/:userId", OutletRequest);
 
 module.exports = routerOutlet;

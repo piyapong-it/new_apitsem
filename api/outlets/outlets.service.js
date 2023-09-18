@@ -167,4 +167,22 @@ module.exports = {
         }
       );
   },
+  OutletRequest: async (userId, callBack) => {
+    const pool = await poolPromise;
+    const queryResult = await pool
+      .request()
+      .input("requestBy", sql.VarChar, userId)
+      .query(
+        `DECLARE	@RetMessage nvarchar(255)
+        Exec spGetOutlRequest @requestBy = @requestBy,
+        @RetMessage = @RetMessage OUTPUT SELECT	@RetMessage as N'RetMessage' ;`,
+        (error, results, fieds) => {
+          if (error) {
+            console.log("error");
+            return callBack(error);
+          }
+          return callBack(null, results);
+        }
+      );
+  },
 };
