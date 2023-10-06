@@ -6,7 +6,8 @@ const {
     updateUser, 
     deleteUser,
     login,
-    updatePws
+    updatePws,
+    createUserByTSEM
 } = require("./user.controller");
 const router = require("express").Router();
 const { checkToken } = require("../../auth/token_validation");
@@ -18,6 +19,7 @@ router.get("/:id", checkToken, getUserById);
 router.patch("/", checkToken, updateUser);
 router.delete("/", checkToken, deleteUser);
 router.post("/login", login);
-router.post("/updatePws", checkToken, updatePws);
+router.post("/updatePws", updatePws);
+router.post("/createUserByTSEM", createUserByTSEM);
 
 module.exports = router;

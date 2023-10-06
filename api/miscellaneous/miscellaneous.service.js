@@ -254,8 +254,8 @@ module.exports = {
             .input('Image4', sql.NVarChar(250), data.image4)
             .input('Quantity', sql.Numeric(38,0), data.quantity)
             .input('Remark', sql.NVarChar(250), data.remark)
-            .input('FinishText', sql.NVarChar(250), data.finishtext)
-            .input('UpdateBy', sql.NVarChar(10), data.updateby)
+            .input('FinishText', sql.NVarChar(500), data.finishtext)
+            .input('UpdateBy', sql.NVarChar(50), data.updateby)
 
             .query(`DECLARE	@RetMessage varchar(50)
                     EXEC [dbo].[spUpdateComplaintTrans]
@@ -295,8 +295,8 @@ module.exports = {
             .input('QuestionCategory', sql.NVarChar(250), data.questioncategory)
             .input('AnswerId', sql.Int, data.answerid)
             .input('AnswerText', sql.NVarChar(250), data.answertext)
-            .input('FinishText', sql.NVarChar(250), data.finishtext)
-            .input('UpdateBy', sql.NVarChar(10), data.updateby)
+            .input('FinishText', sql.NVarChar(500), data.finishtext)
+            .input('UpdateBy', sql.NVarChar(50), data.updateby)
 
             .query(`DECLARE	@RetMessage varchar(50)
                     EXEC [dbo].[spUpdateComplaintQuiz]
